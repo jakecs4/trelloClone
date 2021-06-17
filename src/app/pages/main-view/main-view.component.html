@@ -1,0 +1,54 @@
+<div class="wrapper" >
+    <div class="navbar">
+        <div class="title">
+            <img class="logo" src="../../../assets/lynch.png"> 
+            <p>Lynchpin Trello POC</p>
+        </div>
+        <div class="menu">
+            
+        </div>
+    </div>
+
+    <div class="board" >
+
+        <div class="board-nav">
+            <p class="board-name"> Team Project </p>
+            
+            <button mat-raised-button (click)="addBoard()">Add New Board <mat-icon>add_to_photos</mat-icon></button>
+       
+        </div>
+
+        <div class="board-wrapper">
+            <div class="board-columns" cdkDropListGroup>
+                <div class="board-column" *ngFor="let column of board.columns; index as i">
+                    <div class="col-nav">
+                        <div class="column-title">
+                            {{ column.name }}
+                            <button mat-icon-button (click)="editBoard(i)"><mat-icon>edit</mat-icon></button>
+                        </div>
+                        <button mat-icon-button color="warn"(click)="removeBoard(column.name)"><mat-icon>close</mat-icon></button>    
+                    </div>
+                    <button mat-raised-button (click)="addCard(i)">Add New Card <mat-icon>control_point</mat-icon></button>
+                    <br>
+                    <div class="tasks-container" 
+                        cdkDropList
+                        #todoList="cdkDropList"
+                        [cdkDropListData]="column.tasks"
+                        (cdkDropListDropped)="drop($event)">
+                        <div class="task" *ngFor="let item of column.tasks; index as t" cdkDrag>
+                            {{ item }}
+                            <div>
+                                <button mat-icon-button (click)="editCard(i, t)"><mat-icon>edit</mat-icon></button>
+                                <button mat-flat-button color="white"(click)="removeTask(item, i, t)"><mat-icon>cancel</mat-icon></button> 
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        Created by Jake Lane.
+    </div>
+</div>

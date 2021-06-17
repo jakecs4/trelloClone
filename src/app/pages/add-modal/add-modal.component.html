@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h5 class="modal-title"> {{fromParent.action}} {{ fromParent.attr }} </h5>
+    <button type="button" class="close" data-dismiss="modal" (click)="closeModal('dismiss')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <mat-form-field class="form-field">
+        <mat-label>Enter {{ fromParent.attr }} Name</mat-label>
+        <input matInput type="text" [(ngModel)]="value" (keydown)="closeModalEvent($event)">
+        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal('close')">Close</button>
+    <button type="button" class="btn btn-primary" (click)="closeModal('add')">Add</button>
+</div>
